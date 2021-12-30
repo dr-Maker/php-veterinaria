@@ -107,12 +107,16 @@ class usuariosController extends Controller
 
         if(Session::get('autenticado')){
 
-           $usuario_id = Usuario::find(Session::get('usuario_id'));
-            echo $usuario_id;
-
-            // buscar al funcionario en la base de dato de log usuario por id_usuario
-            // traer el ultimo registro 
-            // modificacion a la hora de salida con la hora actual
+           $usuario = Usuario::find(Session::get('usuario_id'));
+           //$funcionario = Funcionario::select('id')->where('email', $this->getPostParam('email'))->first();
+           $id_logusuario = LogUsuario::select('id')->where('id_usuario', $usuario->funcionario_id)->orderBy('created_at',"desc")->first();
+            
+           
+           $usuarioLogout = LogUsuario::find($this->filtrarInt($id_logusuario->id));
+           $dateTime = new DateTime('NOW');
+           $date = $dateTime->format('Y-m-d H:i:s');
+           $usuarioLogout->updated_at = $date;
+           $usuarioLogout->save();
         }
 
 

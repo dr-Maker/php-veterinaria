@@ -4,6 +4,7 @@
             <div class="sidebar-box ftco-animate">
                 <h3>
                     {$title}
+                     <a href="{$_layoutParams.root}pdf" class="btn btn-outline-success btn-sm">Generar PDF</a>
                   
                 </h3>
                 {include file="../partials/_mensajes.tpl"}
